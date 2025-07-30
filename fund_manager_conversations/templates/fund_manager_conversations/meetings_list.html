@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Meetings</title>
+</head>
+<body>
+    <h1>All Meetings</h1>
+
+    <ul>
+        {% for meeting in meetings %}
+            <li>
+                <a href="{% url 'meeting_detail' meeting.pk %}">
+                    {{ meeting.title }}
+                </a> ({{ meeting.meeting_type }})
+
+                {% if meeting.pdf_file %}
+                    <a href="{{ meeting.pdf_file.url }}" target="_blank">📄 View File</a>
+                {% else %}
+                    <span>No PDF Uploaded</span>
+                {% endif %}
+
+                {% if meeting.audio_file %}
+                    <a href="{{ meeting.audio_file.url }}" target="_blank">🔊 Listen Audio</a>
+                {% else %}
+                    <span>No Audio Uploaded</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ meeting.title }}</title>
+</head>
+<body>
+    <h1>{{ meeting.title }}</h1>
+    <p><strong>Type:</strong> {{ meeting.get_meeting_type_display }}</p>
+    <p><strong>Date:</strong> {{ meeting.meeting_date }}</p>
+    <p><strong>Content:</strong> {{ meeting.content }}</p>
+
+    {% if meeting.pdf_file %}
+        <p><a href="{{ meeting.pdf_file.url }}" target="_blank">📄 View Attached PDF</a></p>
+    {% else %}
+        <p>No PDF uploaded.</p>
+    {% endif %}
+
+    {% if meeting.audio_file %}
+        <p>
+            <strong>Audio:</strong><br>
+            <audio controls>
+                <source src="{{ meeting.audio_file.url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </p>
+    {% else %}
+        <p>No Audio uploaded.</p>
+    {% endif %}
+
+    <p><a href="/">⬅ Back to All Meetings</a></p>
+</body>
+</html>
